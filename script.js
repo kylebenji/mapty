@@ -301,6 +301,8 @@ class Mapty {
         this.#workouts.push(Object.assign(new RunningWorkout(), workout));
       if (workout.type === "cycling")
         this.#workouts.push(Object.assign(new CyclingWorkout(), workout));
+      if (workout.type === "hiking")
+        this.#workouts.push(Object.assign(new HikingWorkout(), workout));
     });
 
     this.#workouts.forEach((workout) => {
