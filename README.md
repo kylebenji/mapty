@@ -1,4 +1,4 @@
-# Functionality
+## Functionality
 
 - Can place pins on the map and record specific workout information on them
 - can choose between a running and cycling workout
@@ -11,7 +11,7 @@
 
 - If you want to reset the page you can use the mapty.reset() function in the console (hoping to move to UI in the future)
 
-### Ideas for further functionality additions
+## Ideas for further functionality additions
 
 - Add a delete workout button so a workout that was previously recorded can be removed
 - add an edit workout button so workouts with already stored data can be updated
