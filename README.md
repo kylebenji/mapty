@@ -13,13 +13,14 @@
 
 ## Ideas for further functionality additions
 
-- Add a delete workout button so a workout that was previously recorded can be removed
+- ~~Add a delete workout button so a workout that was previously recorded can be removed~~
 - add an edit workout button so workouts with already stored data can be updated
-- add a public interface to delete all workouts and clear information
-- add more types of workouts like hikes
+- add an options menu with the functionality below
+  - add a public interface to delete all workouts and clear information
+  - add ability to position the map to show all workouts
+- ~~add more types of workouts like hikes~~
 - add sorting to workouts based on duration or distance
 - make error messages and confirmations more built in rather than just an alert
-- add ability to position the map to show all workouts
 - add ability to draw lines and shapes and the like that are stored with individual workouts
 - add ability to hide points on map with a button so you can declutter it
 - Geocode location of run using 3rd party API and display that as part of the info
