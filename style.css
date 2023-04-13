@@ -3,6 +3,8 @@
   --color-brand--2: #00c46a;
   --color-brand--3: #4602e1;
 
+  --color-alert: #c91441;
+
   --color-dark--1: #2d3439;
   --color-dark--2: #42484d;
   --color-light--1: #aaa;
@@ -73,6 +75,7 @@ a:visited {
   padding: 1.5rem 2.25rem;
   margin-bottom: 1.75rem;
   cursor: pointer;
+  position: relative;
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -115,6 +118,21 @@ a:visited {
   color: var(--color-light--1);
   text-transform: uppercase;
   font-weight: 800;
+}
+
+.workout__delete {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: 20px;
+  width: 20px;
+  background-color: var(--color-dark--2);
+  color: var(--color-alert);
+  border-radius: 5px;
+  border: 2px solid var(--color-alert);
+  padding: auto;
+  font-size: 10px;
+  cursor: pointer;
 }
 
 .form {
