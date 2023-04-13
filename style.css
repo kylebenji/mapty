@@ -117,6 +117,9 @@ a:visited {
   font-weight: 800;
 }
 
+.workout__delete {
+}
+
 .form {
   background-color: var(--color-dark--2);
   border-radius: 5px;
