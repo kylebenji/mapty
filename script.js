@@ -21,7 +21,7 @@ class WorkoutStat {
     return (numerat / denom).toFixed(2);
   }
 }
-const distance = new WorkoutStat("🏃‍♂️", "miles");
+const distance = new WorkoutStat("", "miles");
 const duration = new WorkoutStat("⏱", "min");
 const pace = new WorkoutStat("⚡️", "min/mile");
 const cadence = new WorkoutStat("🦶🏼", "spm");
@@ -33,7 +33,7 @@ class Workout {
   id = (Date.now() + "").slice(-10);
   description;
   // prettier-ignore
-  months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Oct","Nov","Dec",];
+  static months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Oct","Nov","Dec",];
 
   constructor(coords, distanceIn, durationIn) {
     this.stats = new Map();
@@ -43,7 +43,7 @@ class Workout {
   }
 
   getFormattedDate() {
-    return `${this.months[this.date.getMonth()]} ${this.date.getDate()}`;
+    return `${Workout.months[this.date.getMonth()]} ${this.date.getDate()}`;
   }
 
   getHTML() {
@@ -111,6 +111,7 @@ class Mapty {
   #map;
   #mapEvent;
   #workouts = [];
+  #markers = [];
 
   constructor() {
     //get user position
@@ -122,7 +123,10 @@ class Mapty {
     //event listeners
     inputType.addEventListener("change", this.#toggleElevationField.bind(this));
     form.addEventListener("submit", this.#newWorkout.bind(this));
-    containerWorkouts.addEventListener("click", this.#panToWorkout.bind(this));
+    containerWorkouts.addEventListener(
+      "click",
+      this.#panToOrDeleteWorkout.bind(this)
+    );
   }
 
   #getPosition() {
@@ -248,10 +252,11 @@ class Mapty {
       className: `${workout.type}-popup`,
       content: workout.getPopupString(),
     };
-    L.marker(workout.coords, markerOptions)
+    const marker = L.marker(workout.coords, markerOptions)
       .addTo(this.#map)
       .bindPopup(L.popup(popupOptions))
       .openPopup();
+    this.#markers.push(marker);
   }
 
   #renderWorkoutSidebar(workout) {
@@ -271,15 +276,34 @@ class Mapty {
     setTimeout(() => (form.style.display = "grid"), 1000);
   }
 
-  #panToWorkout(e) {
+  #panToOrDeleteWorkout(e) {
     //get the workout from the target
     const workoutLi = e.target.closest(".workout");
     if (!workoutLi) return;
+    if (e.target.classList.contains(`workout__delete`)) {
+      this.#deleteWorkout(workoutLi);
+      return;
+    }
     const id = workoutLi.dataset.id;
     let workout = this.#workouts.find((wo) => wo.id === id);
     //get the coordinates from the workout
     //use map.panTo to pan to the coordinates
     this.#map.panTo(workout.coords);
+  }
+
+  #deleteWorkout(workoutLi) {
+    //get workout and HTML element
+    const id = workoutLi.dataset.id;
+    let workoutInd = this.#workouts.findIndex((wo) => wo.id === id);
+    //remove workout from workouts object
+    this.#workouts.splice(workoutInd, 1);
+    //remove workout from sidebar
+    workoutLi.remove();
+    //remove pointer from map
+    this.#markers[workoutInd].remove();
+    this.#markers.splice(workoutInd, 1);
+    //update local storage so it doesn't come back on reload
+    this.#setLocalStorage();
   }
 
   #setLocalStorage() {
@@ -302,6 +326,8 @@ class Mapty {
         this.#workouts.push(Object.assign(new RunningWorkout(), workout));
       if (workout.type === "cycling")
         this.#workouts.push(Object.assign(new CyclingWorkout(), workout));
+      if (workout.type === "hiking")
+        this.#workouts.push(Object.assign(new HikingWorkout(), workout));
     });
 
     this.#workouts.forEach((workout) => {
