@@ -60,7 +60,7 @@ class Workout {
     return `<li class="workout workout--${this.type}" data-id="${this.id}">
           <h2 class="workout__title">${this.description}</h2>
           ${innerHTML}
-          <button class="workout__delete">x</button>
+          <button class="workout__delete">X</button>
         </li>`;
   }
 }

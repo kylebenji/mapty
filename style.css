@@ -51,12 +51,49 @@ a:visited {
   padding: 3rem 5rem 4rem 5rem;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .logo {
   height: 5.2rem;
   align-self: center;
   margin-bottom: 4rem;
+}
+
+.menu {
+  position: absolute;
+  right: 50px;
+  top: 40px;
+}
+
+.menu button {
+  background-color: var(--color-dark--2);
+  color: var(--color-light--2);
+  width: 80px;
+  height: 40px;
+}
+
+.btn-menu {
+  border: none;
+}
+
+.menu-content {
+  display: none;
+  flex-direction: column;
+}
+
+.menu-content button {
+  border: none;
+  border-top: 2px solid var(--color-dark--3);
+  z-index: 15;
+}
+
+.menu button:hover {
+  background-color: var(--color-dark--3);
+}
+
+.menu:hover .menu-content {
+  display: flex;
 }
 
 .workouts {
