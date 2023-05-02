@@ -10,6 +10,7 @@ const inputDistance = document.querySelector(".form__input--distance");
 const inputDuration = document.querySelector(".form__input--duration");
 const inputCadence = document.querySelector(".form__input--cadence");
 const inputElevation = document.querySelector(".form__input--elevation");
+const menu = document.querySelector(".menu");
 
 class WorkoutStat {
   constructor(emoji, unit) {
@@ -127,6 +128,7 @@ class Mapty {
       "click",
       this.#panToOrDeleteWorkout.bind(this)
     );
+    menu.addEventListener("click", this.#menuHandler.bind(this));
   }
 
   #getPosition() {
@@ -178,6 +180,22 @@ class Mapty {
       inputElevation.closest(".form__row").classList.add("form__row--hidden");
       inputCadence.closest(".form__row").classList.remove("form__row--hidden");
     }
+  }
+
+  #centerMap() {
+    const initCoords = [this.#workouts[0].coords, this.#workouts[1].coords];
+    const coords = this.#workouts.map((workout) => workout.coords);
+    let bounds = L.latLngBounds(coords);
+    this.#map.flyToBounds(bounds);
+  }
+
+  #resetHandler() {
+    console.log("reset");
+  }
+
+  #menuHandler(e) {
+    if (e.target.classList.contains("center-map")) this.#centerMap();
+    if (e.target.classList.contains("reset-workouts")) this.#resetHandler();
   }
 
   #newWorkout(e) {
