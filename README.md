@@ -7,17 +7,13 @@
 - uses geolocation to determine approximate location of user so that the map can focus on them on start
 - calculates speed or pace for the Run/Bike ride
 
-## Tips
-
-- If you want to reset the page you can use the mapty.reset() function in the console (hoping to move to UI in the future)
-
 ## Ideas for further functionality additions
 
 - ~~Add a delete workout button so a workout that was previously recorded can be removed~~
 - add an edit workout button so workouts with already stored data can be updated
-- add an options menu with the functionality below
-  - add a public interface to delete all workouts and clear information
-  - add ability to position the map to show all workouts
+- ~~add an options menu with the functionality below~~
+  - ~~add a public interface to delete all workouts and clear information~~
+  - ~~add ability to position the map to show all workouts~~
 - ~~add more types of workouts like hikes~~
 - add sorting to workouts based on duration or distance
 - make error messages and confirmations more built in rather than just an alert

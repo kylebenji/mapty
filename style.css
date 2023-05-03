@@ -4,6 +4,8 @@
   --color-brand--3: #4602e1;
 
   --color-alert: #c91441;
+  --color-alert-trans: #c9144171;
+  --color-alert-light: #eb405a;
 
   --color-dark--1: #2d3439;
   --color-dark--2: #42484d;
@@ -80,11 +82,12 @@ a:visited {
 .menu-content {
   display: none;
   flex-direction: column;
+  border-top: 2px solid var(--color-dark--3);
 }
 
 .menu-content button {
-  border: none;
-  border-top: 2px solid var(--color-dark--3);
+  border: 2px solid var(--color-dark--3);
+  border-top: 0px;
   z-index: 15;
 }
 
@@ -169,18 +172,17 @@ a:visited {
   top: 10px;
   height: 20px;
   width: 20px;
-  background-color: var(--color-dark--2);
+  background-color: inherit;
   color: var(--color-alert);
   border-radius: 5px;
   border: 2px solid var(--color-alert);
   padding: auto;
   font-size: 10px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .workout__delete:hover {
-  background-color: var(--color-dark--1);
+  background-color: var(--color-alert-trans);
 }
 
 .form {
@@ -290,4 +292,79 @@ a:visited {
 }
 .hiking-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--3);
+}
+
+#modal-confirm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 69rem;
+  z-index: 1000;
+  background-color: var(--color-dark--2);
+
+  padding: 5rem 6rem;
+  transition: all 0.5s;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#modal-confirm p {
+  font-size: 2.5rem;
+}
+
+#modal-confirm button {
+  background-color: var(--color-dark--3);
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: black solid 1px;
+  font-weight: 500;
+}
+
+#btn-modal-cancel {
+  color: inherit;
+}
+
+#modal-confirm button:hover {
+  background-color: var(--color-dark--2);
+}
+
+#modal-buttons {
+  padding-top: 15px;
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#btn-modal-confirm,
+#btn-modal-close {
+  color: var(--color-alert-light);
+}
+
+#btn-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 2.75rem;
+}
+
+#overlay {
+  background-color: var(--color-dark--1);
+  filter: opacity(65%);
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  z-index: 900;
+  transition: all 0.5s;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }

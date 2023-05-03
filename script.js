@@ -11,6 +11,8 @@ const inputDuration = document.querySelector(".form__input--duration");
 const inputCadence = document.querySelector(".form__input--cadence");
 const inputElevation = document.querySelector(".form__input--elevation");
 const menu = document.querySelector(".menu");
+const modalConfirm = document.querySelector("#modal-confirm");
+const overlay = document.querySelector("#overlay");
 
 class WorkoutStat {
   constructor(emoji, unit) {
@@ -128,7 +130,17 @@ class Mapty {
       "click",
       this.#panToOrDeleteWorkout.bind(this)
     );
+
+    //modal event handlers
     menu.addEventListener("click", this.#menuHandler.bind(this));
+    [
+      overlay,
+      modalConfirm.querySelector("#btn-modal-close"),
+      modalConfirm.querySelector("#btn-modal-cancel"),
+    ].forEach((el) => el.addEventListener("click", this.#toggleModal));
+    modalConfirm
+      .querySelector("#btn-modal-confirm")
+      .addEventListener("click", this.#reset);
   }
 
   #getPosition() {
@@ -189,13 +201,16 @@ class Mapty {
     this.#map.flyToBounds(bounds);
   }
 
-  #resetHandler() {
-    console.log("reset");
+  #toggleModal() {
+    //display confirmation window
+    modalConfirm.classList.toggle("hidden");
+    overlay.classList.toggle("hidden");
+    //actual reset is handled by event handlers added in constructor
   }
 
   #menuHandler(e) {
     if (e.target.classList.contains("center-map")) this.#centerMap();
-    if (e.target.classList.contains("reset-workouts")) this.#resetHandler();
+    if (e.target.classList.contains("reset-workouts")) this.#toggleModal();
   }
 
   #newWorkout(e) {
@@ -372,7 +387,7 @@ class Mapty {
     return value;
   }
 
-  reset() {
+  #reset() {
     localStorage.removeItem("workoutsMapty");
     location.reload();
   }
